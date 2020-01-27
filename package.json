@@ -1,0 +1,27 @@
+{
+  "name": "nodejspractice",
+  "version": "0.1.0",
+  "description": "Chat en backend basico",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgearojas25/nodeJsPractice.git"
+  },
+  "keywords": [
+    "chat",
+    "telegram",
+    "server"
+  ],
+  "author": "Jorge Rojas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jorgearojas25/nodeJsPractice/issues"
+  },
+  "homepage": "https://github.com/jorgearojas25/nodeJsPractice#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
