@@ -1,20 +1,24 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 const router = express.Router();
 
 var app = express();
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(router);
 
-router.get('/message', function(req, res){
-    res.send('Lista de mensajes');
+router.get("/message", function(req, res) {
+  console.log(req.headers);
+  res.headers({
+      "Custom-header" : "Nuestro header ",
+  });
+  res.send("Lista de mensajes");
 });
 
-router.post('/message', function(req, res){
-    console.log(req.body);
-    console.log(req.query);
-    res.send('Mensaje agregado ' + req.body.text);
+router.post("/message", function(req, res) {
+  console.log(req.body);
+  console.log(req.query);
+  res.send("Mensaje agregado " + req.body.text);
 });
 
 // app.use('/', function(req, res){
@@ -22,4 +26,7 @@ router.post('/message', function(req, res){
 // });
 
 app.listen(3000);
-console.log('la app esta funcionando en http://localhost:3000');
+console.log("la app esta funcionando en http://localhost:3000");
+
+// Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+//nodemon server
