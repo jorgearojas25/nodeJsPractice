@@ -9,10 +9,18 @@ app.use(router);
 
 router.get("/message", function(req, res) {
   console.log(req.headers);
-  res.headers({
-      "Custom-header" : "Nuestro header ",
+  res.header({
+    custom: "Mi header"
   });
-  res.send("Lista de mensajes");
+  res.status(201).send({
+    resultado: true,
+    tipoNotificacion: 1,
+    Entidades: [
+      { id: 1, nombre: "jorge" },
+      { id: 2, nombre: "dani" }
+    ],
+    mensajes: ["hola", "jejjje"]
+  });
 });
 
 router.post("/message", function(req, res) {
