@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const router = express.Router();
+const response = require("./network/response");
 
 var app = express();
 app.use(bodyParser.json());
@@ -26,7 +27,7 @@ router.get("/message", function(req, res) {
 router.post("/message", function(req, res) {
   console.log(req.body);
   console.log(req.query);
-  res.send("Mensaje agregado " + req.body.text);
+  response.success(req, res);
 });
 
 // app.use('/', function(req, res){
