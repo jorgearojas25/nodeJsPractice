@@ -1,3 +1,5 @@
+const store = require("./store");
+
 const AddMesagge = (user, message) => {
   return new Promise((resolve, reject) => {
     if (!user || !message) {
@@ -6,18 +8,23 @@ const AddMesagge = (user, message) => {
       return false;
     }
     let respuesta = {
-        resultado: true,
-        tipoNotificacion: 1,
-        Entidades: [
-          { id: 1, nombre: user, fecha: new Date(), }
-        ],
-        mensajes: [message]
-      };
-    console.log(respuesta);
+      id: Math.random(),
+      user: user,
+      date: new Date(),
+      message: message
+    };
+    store.add(respuesta);
     resolve(respuesta);
   });
 };
 
+const GetMessage = () => {
+  return new Promise((resolve, reject) => {
+    resolve(store.list());
+  });
+};
+
 module.exports = {
-  AddMesagge
+  AddMesagge,
+  GetMessage
 };

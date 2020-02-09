@@ -20,9 +20,13 @@ router.post("/", function(req, res) {
 });
 
 router.get("/", function(req, res) {
-  console.log(req.body);
-  console.log(req.query);
-  response.success(req, res, "lista");
+  controller.GetMessage()
+    .then((messageList) => {
+      response.success(req, res, messageList, 201)
+    })
+    .catch(e => {
+      response.error(req, res, 'Unexpected Error', 500, '[Message Network Get] ' + e)
+    })
 });
 
 module.exports = router;
