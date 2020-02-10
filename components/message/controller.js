@@ -18,13 +18,26 @@ const AddMesagge = (user, message) => {
   });
 };
 
-const GetMessage = () => {
+const GetMessage = (filterUser) => {
   return new Promise((resolve, reject) => {
-    resolve(store.list());
+    resolve(store.list(filterUser));
   });
 };
 
+const UpdateMessage = (id, message) => {
+  return new Promise(async (resolve, reject) => {
+    if(!id || !message){
+      reject('Invalida data')
+      return false;
+    }
+    const response = await store.updateText(id, message)
+
+    resolve(response);
+  })
+}
+
 module.exports = {
   AddMesagge,
-  GetMessage
+  GetMessage,
+  UpdateMessage,
 };
