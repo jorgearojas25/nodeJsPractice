@@ -40,4 +40,14 @@ router.patch('/:id', (req, res) =>{
     });
 });
 
+router.delete('/:id', (req, res) => {
+  controller.DeleteMessage(req.params.id)
+    .then(() => {
+      response.success(req, res, `Ususario ${req.params.id} eliminado`, 200)
+    })
+    .catch(e => {
+      response.error(req, res, 'Error interno', 500, `[Network Message Delete] ${e}`)
+    })
+})
+
 module.exports = router;
