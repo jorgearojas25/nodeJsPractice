@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const mySchema = new Schema({
-    id: Number,
-    user: String,
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User',
+    },
     date: Date,
     message: {
         type: String,

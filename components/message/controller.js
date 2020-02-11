@@ -8,7 +8,6 @@ const AddMesagge = (user, message) => {
       return false;
     }
     let respuesta = {
-      id: Math.random(),
       user: user,
       date: new Date(),
       message: message
