@@ -6,8 +6,9 @@ const bodyParser = require("body-parser");
 const socket = require('./socket')
 const router = require("./network/routes");
 const db = require("./db");
+const config = require("./config");
 
-db("mongodb+srv://dbuser:D3s4rr0ll0@cluster0-w7ttm.mongodb.net/test");
+db(config.dbUrl);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,8 +18,10 @@ socket.connect(server);
 
 router(app);
 
-server.listen(3000, () => {
-  console.log("la app esta funcionando en http://localhost:3000");
+app.use(`${config.publicRoute}`, express.static('public'));
+
+server.listen(config.port, () => {
+  console.log(`la app esta funcionando en ${config.host}:${config.port}`);
 });
 
 // Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
