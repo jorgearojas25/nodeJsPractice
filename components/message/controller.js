@@ -1,23 +1,33 @@
 const store = require("./store");
+const socket = require('../../socket').socket;
 
-const AddMesagge = (user, message) => {
+const AddMesagge = (user, message, chat, file) => {
   return new Promise((resolve, reject) => {
-    if (!user || !message) {
+    if (!user || !message || !chat) {
       console.log("[messageController] No hay usuario o mensaje");
       reject("Los datos son incorrectos");
       return false;
     }
+    let fileUrl = "";
+    if (file) {
+      fileUrl = `http://localhost:3000/app/files/${file.filename}`;
+    }
     let respuesta = {
+      chat: chat,
       user: user,
       date: new Date(),
-      message: message
+      message: message,
+      file: fileUrl
     };
     store.add(respuesta);
+
+    socket.io.emmit('message', respuesta);
+
     resolve(respuesta);
   });
 };
 
-const GetMessage = (filterUser) => {
+const GetMessage = filterUser => {
   return new Promise((resolve, reject) => {
     resolve(store.list(filterUser));
   });
@@ -25,36 +35,36 @@ const GetMessage = (filterUser) => {
 
 const UpdateMessage = (id, message) => {
   return new Promise(async (resolve, reject) => {
-    if(!id || !message){
-      reject('Invalida data')
+    if (!id || !message) {
+      reject("Invalida data");
       return false;
     }
-    const response = await store.updateText(id, message)
+    const response = await store.updateText(id, message);
 
     resolve(response);
-  })
-}
+  });
+};
 
-const DeleteMessage = (id) => {
+const DeleteMessage = id => {
   return new Promise((resolve, reject) => {
-    if(!id){
-      reject('Id invalido');
+    if (!id) {
+      reject("Id invalido");
       return false;
     }
-    store.remove(id)
+    store
+      .remove(id)
       .then(() => {
         resolve();
       })
       .catch(e => {
         reject(e);
       });
-
   });
-}
+};
 
 module.exports = {
   AddMesagge,
   GetMessage,
   UpdateMessage,
-  DeleteMessage,
+  DeleteMessage
 };

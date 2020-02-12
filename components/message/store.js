@@ -5,11 +5,11 @@ const addMessage = message => {
   myMessage.save();
 };
 
-const getMessages = async filterUser => {
+const getMessages = async filterChat => {
   return new Promise((resolve, reject) => {
     let filter = {};
-    if (filterUser !== null) {
-      filter = { user: filterUser };
+    if (filterChat !== null) {
+      filter = { chat: filterChat };
     }
     const messages = Model.find(filter)
       .populate("user")

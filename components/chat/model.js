@@ -5,7 +5,7 @@ const mySchema = new Schema({
   users: [
     {
       type: Schema.ObjectId,
-      ref: "User"
+      ref: 'User',
     }
   ]
 });
